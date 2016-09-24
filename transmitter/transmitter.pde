@@ -4,7 +4,7 @@ Serial port;
 void setup() {
   size(200, 200);
   textSize(20);
-  //port = new Serial(this, "COM4", 9600);
+  port = new Serial(this, "COM5", 9600);
 }
 
 void draw() {
@@ -15,16 +15,16 @@ void draw() {
   if (keyPressed) {
     if (key == 'w' || key == 'W') {
       firstButtonColor = #ff1820;
-      //port.write("41");
+      port.write(49);
     } else if (key == 's' || key == 'S') {
       thirdButtonColor = #ff1820;
-      //port.write("42");
+      port.write(50);
     } else if (key == 'a' || key == 'A') { 
       secondButtonColor = #ff1820;
-      //port.write("43");
+      port.write(51);
     } else if (key == 'd' || key == 'D') 
       fourthButtonColor = #ff1820;
-      //port.write("44");
+      port.write(52);
   } else {
     fill(255);
   }
