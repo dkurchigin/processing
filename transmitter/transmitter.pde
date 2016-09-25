@@ -1,33 +1,30 @@
 import processing.serial.*;
 Serial port;
 
+boolean wKeyPressed, sKeyPressed, aKeyPressed, dKeyPressed = false;
+
 void setup() {
   size(200, 200);
   textSize(20);
-  port = new Serial(this, "COM5", 9600);
+  port = new Serial(this, "COM4", 9600);
 }
 
 void draw() {
   int firstButtonColor, secondButtonColor, thirdButtonColor, fourthButtonColor;
   firstButtonColor = secondButtonColor = thirdButtonColor = fourthButtonColor = 255;
   int textColor = 0;
+  
   size(200, 200);
-  if (keyPressed) {
-    if (key == 'w' || key == 'W') {
-      firstButtonColor = #ff1820;
-      port.write(49);
-    } else if (key == 's' || key == 'S') {
-      thirdButtonColor = #ff1820;
-      port.write(50);
-    } else if (key == 'a' || key == 'A') { 
-      secondButtonColor = #ff1820;
-      port.write(51);
-    } else if (key == 'd' || key == 'D') 
-      fourthButtonColor = #ff1820;
-      port.write(52);
-  } else {
-    fill(255);
+  if (wKeyPressed) { 
+    firstButtonColor = #ff1820;
+  } else if (aKeyPressed) { 
+    secondButtonColor = #ff1820;
+  } else if (sKeyPressed) { 
+    thirdButtonColor = #ff1820;
+  } else if (dKeyPressed) { 
+    fourthButtonColor = #ff1820;
   }
+  
   fill(firstButtonColor);
   rect(80, 50, 40, 40);
   fill(textColor);
@@ -44,4 +41,44 @@ void draw() {
   rect(140, 110, 40, 40);
   fill(textColor);
   text("D", 154, 137);
+}
+
+void keyPressed() {
+  if (key == 'w' || key == 'W') {
+    wKeyPressed = true;
+  } else if (key == 's' || key == 'S') {
+    sKeyPressed = true;
+  } else if (key == 'a' || key == 'A') {
+    aKeyPressed = true;
+  } else if (key == 'd' || key == 'D') {
+    dKeyPressed = true;
+  }
+  sendCommand();
+}
+
+void keyReleased() {
+  if (key == 'w' || key == 'W') {
+    wKeyPressed = false;
+  } else if (key == 's' || key == 'S') {
+    sKeyPressed = false;
+  } else if (key == 'a' || key == 'A') {
+    aKeyPressed = false;
+  } else if (key == 'd' || key == 'D') {
+    dKeyPressed = false;
+  }
+  sendCommand();
+}
+
+void sendCommand() {
+  if (wKeyPressed) {
+    port.write(49);
+  } else if (sKeyPressed) {
+    port.write(50);
+  } else if (aKeyPressed) {
+    port.write(51);
+  } else if (dKeyPressed) {
+    port.write(52);
+  } else {
+    port.write(48);
+  }  
 }
