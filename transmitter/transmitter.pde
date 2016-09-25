@@ -75,9 +75,9 @@ void sendCommand() {
   } else if (sKeyPressed) {
     port.write(50);
   } else if (aKeyPressed) {
-    port.write(51);
-  } else if (dKeyPressed) {
     port.write(52);
+  } else if (dKeyPressed) {
+    port.write(51);
   } else {
     port.write(48);
   }  
