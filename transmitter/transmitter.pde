@@ -2,6 +2,7 @@ import processing.serial.*;
 Serial port;
 
 boolean wKeyPressed, sKeyPressed, aKeyPressed, dKeyPressed = false;
+int timer;
 
 void setup() {
   size(200, 200);
@@ -11,8 +12,8 @@ void setup() {
 
 void draw() {
   int firstButtonColor, secondButtonColor, thirdButtonColor, fourthButtonColor;
-  firstButtonColor = secondButtonColor = thirdButtonColor = fourthButtonColor = 255;
   int textColor = 0;
+  firstButtonColor = secondButtonColor = thirdButtonColor = fourthButtonColor = 255;
   
   size(200, 200);
   if (wKeyPressed) { 
@@ -44,29 +45,31 @@ void draw() {
 }
 
 void keyPressed() {
-  if (key == 'w' || key == 'W') {
+  if (key == 'w' || key == 'W' || key == 'ц' || key == 'Ц') {
     wKeyPressed = true;
-  } else if (key == 's' || key == 'S') {
+  } else if (key == 's' || key == 'S' || key == 'ы' || key == 'Ы') {
     sKeyPressed = true;
-  } else if (key == 'a' || key == 'A') {
+  } else if (key == 'a' || key == 'A' || key == 'ф' || key == 'Ф') {
     aKeyPressed = true;
-  } else if (key == 'd' || key == 'D') {
+  } else if (key == 'd' || key == 'D' || key == 'в' || key == 'В') {
     dKeyPressed = true;
   }
-  sendCommand();
+  if (millis() - timer >= 300) {
+    sendCommand();
+    timer = millis();
+  }
 }
 
 void keyReleased() {
-  if (key == 'w' || key == 'W') {
+  if (key == 'w' || key == 'W' || key == 'ц' || key == 'Ц') {
     wKeyPressed = false;
-  } else if (key == 's' || key == 'S') {
+  } else if (key == 's' || key == 'S' || key == 'ы' || key == 'Ы') {
     sKeyPressed = false;
-  } else if (key == 'a' || key == 'A') {
+  } else if (key == 'a' || key == 'A' || key == 'ф' || key == 'Ф') {
     aKeyPressed = false;
-  } else if (key == 'd' || key == 'D') {
+  } else if (key == 'd' || key == 'D' || key == 'в' || key == 'В') {
     dKeyPressed = false;
   }
-  sendCommand();
 }
 
 void sendCommand() {
