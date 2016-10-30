@@ -54,7 +54,7 @@ void keyPressed() {
   } else if (key == 'd' || key == 'D' || key == 'в' || key == 'В') {
     dKeyPressed = true;
   }
-  if (millis() - timer >= 300) {
+  if (millis() - timer >= 100) {
     sendCommand();
     timer = millis();
   }
